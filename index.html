@@ -440,7 +440,7 @@
             <li>Accuracy of execution under pressure</li>
             <li>The ability to think the next action</li>
           </ul>
-          <a href="index.html?program=FutLab%20Futsal#contact" class="btn btn-outline btn-sm" style="margin-top:18px;">Learn More &rarr;</a>
+          <a href="index.html?program=FutLab%20Futsal#contact" class="btn btn-outline btn-sm" style="margin-top:18px;">Join the Team &rarr;</a>
         </div>
       </div>
       <div class="program-row">
@@ -478,7 +478,7 @@
   <div class="container">
     <div class="section-head reveal">
       <span class="eyebrow">The FUTLAB Ecosystem</span>
-      <h2>Six branches.<br>One mission.</h2>
+      <h2>Seven branches.<br>One mission.</h2>
       <p>Select a branch to see what it offers and exactly how to get involved — no scrolling required.</p>
     </div>
   </div>
@@ -574,6 +574,7 @@
           <option>FutGear</option>
           <option>FutMedia</option>
           <option>FutMasterclass</option>
+          <option>FutSolo</option>
           <option>Not sure yet</option>
         </select>
       </div>
@@ -611,7 +612,7 @@
         </div>
         <div class="footer-col">
           <h5>Branches</h5>
-          <ul><li><a href="#branches">FutArena</a></li><li><a href="#branches">FutCoach</a></li><li><a href="#branches">FutMasterclass</a></li></ul>
+          <ul><li><a href="#branches">FutArena</a></li><li><a href="#branches">FutCoach</a></li><li><a href="#branches">FutSolo</a></li></ul>
         </div>
         <div class="footer-col">
           <h5>Site</h5>
@@ -646,27 +647,6 @@
   const formErr = document.getElementById('formErr');
   const submitBtn = document.getElementById('submitBtn');
   const programSelect = document.getElementById('program');
-  const messageField = document.getElementById('message');
-
-  // Placeholder text tailored to whichever program is selected
-  const MESSAGE_PLACEHOLDERS = {
-    "FutLab Futsal": "Player age, position, and current team experience...",
-    "FutAcademy": "Player age, position, and specific skills you'd like to focus on...",
-    "FutLab Studio": "Player age, position, and a link or note about the match footage you'd like reviewed...",
-    "FutArena": "Team name (or 'looking for a team'), player ages, and which format you're interested in...",
-    "FutCoach": "Your coaching background and whether you're interested in courses, mentoring, or resources...",
-    "FutGear": "What you're looking to order — individual gear, or a full club package...",
-    "FutMedia": "The player, moment, or story you'd like to share or nominate...",
-    "FutMasterclass": "Player age, position, and which masterclass topic interests you most...",
-    "Not sure yet": "Tell us a bit about what you're looking for and we'll point you in the right direction..."
-  };
-
-  function updateMessagePlaceholder(){
-    const val = programSelect.value;
-    messageField.placeholder = MESSAGE_PLACEHOLDERS[val] || "Player age, position, goals...";
-  }
-  programSelect.addEventListener('change', updateMessagePlaceholder);
-  updateMessagePlaceholder();
 
   bookForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -705,10 +685,7 @@
   const preselect = urlParams.get('program');
   if (preselect) {
     const opt = Array.from(programSelect.options).find(o => o.value === preselect);
-    if (opt) {
-      programSelect.value = preselect;
-      updateMessagePlaceholder();
-    }
+    if (opt) programSelect.value = preselect;
   }
 
   // ---------- Branch Console data ----------
@@ -771,6 +748,16 @@
         ["Pick a Class", "Choose a position-specific or skill-focused masterclass from the schedule."],
         ["Reserve Your Spot", "Seats are limited — reserve through the contact form."],
         ["Train With Guest Coaches", "Attend the session and work through position-specific concepts."]
+      ]
+    },
+    {
+      id: "futsolo", code: "FS", name: "FutSolo", tag: "Repeat", color: "#c76b3a",
+      lede: "Structured, at-home drills and skill reps kids can do on their own to build touch, speed, and confidence between FUTLAB sessions.",
+      focus: ["Solo ball-mastery &amp; first-touch drills", "Speed, agility &amp; footwork circuits", "Simple, space-friendly setups for home or backyard"],
+      steps: [
+        ["Get Your Drill Set", "Receive a starter set of at-home drills matched to the player's age and current level."],
+        ["Practice on Your Own Schedule", "Work through reps a few times a week — just a ball and a bit of space required."],
+        ["Bring It Back to FUTLAB", "Coaches check in on progress and adjust reps during regular sessions."]
       ]
     }
   ];
@@ -840,7 +827,6 @@
       if (opt) {
         e.preventDefault();
         programSelect.value = b.name;
-        updateMessagePlaceholder();
         document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
       }
     });

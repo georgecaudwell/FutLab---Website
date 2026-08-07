@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FutSolo — FUTLAB | Repeat</title>
+<meta name="description" content="FutSolo: Structured, at-home drills and skill reps kids can do on their own to build touch, speed, and confidence between FUTLAB sessions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#0a0a0b;
+    --black-2:#141416;
+    --black-3:#1d1d1f;
+    --charcoal:#242426;
+    --gold-1:#c8a13d;
+    --gold-2:#f3dd9a;
+    --gold-3:#8a6a1e;
+    --cream:#f3efe4;
+    --cream-2:#eae4d3;
+    --ink:#17160f;
+    --white:#f6f4ee;
+    --gray:#a9a69b;
+    --gray-dark:#6b6a63;
+    --line:rgba(200,161,61,0.28);
+    --line-soft:rgba(246,244,238,0.1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--black);
+    color:var(--white);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{
+    font-family:'Oswald',sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.02em;
+    font-weight:600;
+    line-height:1.08;
+  }
+  .eyebrow{
+    font-family:'Space Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.28em;
+    text-transform:uppercase;
+    color:var(--gold-1);
+  }
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  button{font-family:inherit;}
+  .gold-text{
+    background:linear-gradient(120deg,var(--gold-3),var(--gold-2) 45%,var(--gold-1) 80%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .container{max-width:1240px;margin:0 auto;padding:0 32px;}
+  section{position:relative;}
+  .section-pad{padding:120px 0;}
+  @media(max-width:768px){.section-pad{padding:80px 0;}}
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:0.14em;text-transform:uppercase;
+    padding:16px 28px;border-radius:2px;cursor:pointer;transition:all .25s ease;
+    border:1px solid transparent;white-space:nowrap;
+  }
+  .btn-gold{background:linear-gradient(120deg,var(--gold-1),var(--gold-2));color:var(--ink);font-weight:700;}
+  .btn-gold:hover{filter:brightness(1.08);transform:translateY(-1px);}
+  .btn-outline{border-color:rgba(246,244,238,0.35);color:var(--white);background:transparent;}
+  .btn-outline:hover{border-color:var(--gold-1);color:var(--gold-2);}
+  .btn-sm{padding:11px 18px;font-size:11px;}
+
+  /* ---------- Nav ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(10,10,11,0.82);backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .nav-wrap{max-width:1240px;margin:0 auto;padding:0 32px;height:78px;display:flex;align-items:center;justify-content:space-between;}
+  .brand{display:flex;align-items:center;gap:12px;}
+  .brand-mark{width:38px;height:38px;flex-shrink:0;}
+  .brand-word{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;letter-spacing:0.06em;}
+  .brand-word span{color:var(--gold-1);}
+  nav.links{display:flex;gap:36px;align-items:center;}
+  nav.links a{
+    font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;
+    color:var(--gray);position:relative;padding:6px 0;transition:color .2s ease;
+  }
+  nav.links a:hover{color:var(--white);}
+  nav.links a::after{content:'';position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--gold-1);transition:width .25s ease;}
+  nav.links a:hover::after{width:100%;}
+  .nav-cta{display:flex;align-items:center;gap:22px;}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;}
+  .hamburger span{width:24px;height:2px;background:var(--white);display:block;}
+  .mobile-menu{
+    display:none;position:fixed;top:78px;left:0;right:0;bottom:0;background:var(--black);z-index:99;
+    padding:40px 32px;flex-direction:column;gap:28px;
+  }
+  .mobile-menu.open{display:flex;}
+  .mobile-menu a{font-family:'Oswald',sans-serif;font-size:24px;text-transform:uppercase;color:var(--white);border-bottom:1px solid var(--line-soft);padding-bottom:18px;}
+  @media(max-width:900px){
+    nav.links{display:none;}
+    .nav-cta .btn-outline{display:none;}
+    .hamburger{display:flex;}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:168px 0 90px;
+    background:
+      radial-gradient(circle at 82% 12%, rgba(200,161,61,0.14), transparent 45%),
+      radial-gradient(circle at 8% 90%, rgba(200,161,61,0.08), transparent 40%),
+      var(--black);
+    border-bottom:1px solid var(--line-soft);
+    position:relative;overflow:hidden;
+  }
+  .hero-ring{position:absolute;right:-180px;top:-120px;width:620px;height:620px;border:1px solid var(--line);border-radius:50%;opacity:.5;}
+  .hero-ring.two{right:-260px;top:-190px;width:760px;height:760px;opacity:.28;}
+  .hero-grid{display:grid;grid-template-columns:1.15fr 0.85fr;gap:64px;align-items:center;position:relative;z-index:2;}
+  @media(max-width:960px){.hero-grid{grid-template-columns:1fr;gap:56px;}}
+  .hero-logo{width:96px;height:96px;margin-bottom:28px;}
+  .hero h1{font-size:clamp(44px,6.4vw,84px);margin-bottom:6px;}
+  .hero h1 .line2{display:block;}
+  .hero-tag{
+    font-family:'Space Mono',monospace;font-size:13px;letter-spacing:0.3em;text-transform:uppercase;
+    color:var(--gray);margin:22px 0 34px;display:flex;gap:14px;flex-wrap:wrap;
+  }
+  .hero-tag b{color:var(--gold-2);font-weight:700;}
+  .hero p.lede{font-size:18px;color:var(--gray);max-width:520px;margin-bottom:40px;}
+  .hero-btns{display:flex;gap:16px;flex-wrap:wrap;}
+
+  /* Jump strip — quick access to all branches, right in the hero panel */
+  .jump-panel{background:var(--black-2);border:1px solid var(--line-soft);border-radius:6px;padding:30px 28px;}
+  .jump-panel .eyebrow{display:block;margin-bottom:18px;}
+  .jump-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .jump-item{
+    display:flex;align-items:center;gap:12px;padding:12px;border-radius:4px;
+    border:1px solid var(--line-soft);transition:border-color .2s ease, background .2s ease;
+    cursor:pointer;background:none;
+  }
+  .jump-item:hover{border-color:var(--jc,var(--gold-1));background:var(--black-3);}
+  .jump-ring{
+    width:30px;height:30px;border-radius:50%;flex-shrink:0;border:1.5px solid var(--jc,var(--gold-1));
+    display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-weight:700;font-size:11px;color:var(--jc,var(--gold-1));
+  }
+  .jump-item span.jn{font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:0.05em;text-transform:uppercase;color:var(--white);}
+
+  /* ---------- Philosophy ---------- */
+  .philosophy{background:var(--black);}
+  .philosophy-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:70px;align-items:start;}
+  @media(max-width:900px){.philosophy-grid{grid-template-columns:1fr;gap:44px;}}
+  .philosophy h2{font-size:clamp(32px,4vw,46px);margin:14px 0 22px;}
+  .philosophy .body-text{color:var(--gray);font-size:16.5px;max-width:460px;}
+  .philosophy .body-text + .body-text{margin-top:16px;}
+  .philosophy .callout{
+    margin-top:28px;padding-top:24px;border-top:1px solid var(--line);
+    font-family:'Oswald',sans-serif;text-transform:uppercase;font-size:20px;letter-spacing:0.03em;color:var(--gold-2);max-width:420px;
+  }
+  .framework-cards{display:grid;gap:20px;}
+  .fw-card{
+    background:var(--black-2);border:1px solid var(--line-soft);border-radius:6px;padding:26px 28px;
+    display:grid;grid-template-columns:60px 1fr;gap:22px;align-items:flex-start;
+    transition:border-color .25s ease, transform .25s ease;
+  }
+  .fw-card:hover{border-color:var(--line);transform:translateX(4px);}
+  .fw-num{
+    font-family:'Space Mono',monospace;color:var(--gold-1);font-size:14px;border:1px solid var(--line);border-radius:50%;
+    width:42px;height:42px;display:flex;align-items:center;justify-content:center;
+  }
+  .fw-card h4{font-size:18px;letter-spacing:0.04em;margin-bottom:8px;color:var(--white);}
+  .fw-card p{font-size:14.5px;color:var(--gray);}
+
+  /* ---------- Programs ---------- */
+  .programs{background:var(--black-3);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);}
+  .section-head{max-width:640px;margin-bottom:64px;}
+  .section-head .eyebrow{margin-bottom:16px;display:block;}
+  .section-head h2{font-size:clamp(30px,4vw,44px);}
+  .section-head p{color:var(--gray);margin-top:16px;font-size:16.5px;}
+  .program-list{display:grid;gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);}
+  .program-row{background:var(--black-3);display:grid;grid-template-columns:280px 1fr 280px;gap:40px;padding:44px 40px;align-items:start;}
+  @media(max-width:900px){.program-row{grid-template-columns:1fr;gap:18px;padding:36px 26px;}}
+  .program-row .p-name{font-family:'Space Mono',monospace;color:var(--gold-1);font-size:12.5px;letter-spacing:0.14em;text-transform:uppercase;}
+  .program-row h3{font-size:26px;margin-top:10px;color:var(--white);}
+  .program-row .p-desc p{color:var(--gray);font-size:15.5px;margin-bottom:14px;}
+  .p-focus{font-size:12px;font-family:'Space Mono',monospace;letter-spacing:0.1em;color:var(--gray-dark);text-transform:uppercase;margin-bottom:12px;}
+  .p-focus-list li{font-size:14.5px;color:var(--gray);padding-left:16px;position:relative;margin-bottom:9px;}
+  .p-focus-list li::before{content:'';position:absolute;left:0;top:8px;width:6px;height:1px;background:var(--gold-1);}
+
+  /* ---------- Branch Console (signature interactive element) ---------- */
+  .console{background:var(--cream);color:var(--ink);}
+  .console .eyebrow{color:var(--gold-3);}
+  .console .section-head h2{color:var(--ink);}
+  .console .section-head p{color:#5c584c;}
+  .console-wrap{
+    display:grid;grid-template-columns:280px 1fr;gap:0;
+    border:1px solid rgba(23,22,15,0.14);border-radius:8px;overflow:hidden;
+    background:var(--white);
+  }
+  @media(max-width:860px){.console-wrap{grid-template-columns:1fr;}}
+  .console-rail{background:#ece6d6;border-right:1px solid rgba(23,22,15,0.12);}
+  @media(max-width:860px){.console-rail{border-right:none;border-bottom:1px solid rgba(23,22,15,0.12);display:flex;overflow-x:auto;}}
+  .rail-btn{
+    width:100%;display:flex;align-items:center;gap:14px;padding:20px 22px;
+    background:transparent;border:none;border-left:3px solid transparent;cursor:pointer;text-align:left;
+    transition:background .18s ease, border-color .18s ease;
+  }
+  @media(max-width:860px){.rail-btn{width:auto;flex-shrink:0;border-left:none;border-bottom:3px solid transparent;}}
+  .rail-btn:hover{background:rgba(23,22,15,0.04);}
+  .rail-btn.active{background:var(--white);border-left-color:var(--rc,var(--gold-3));}
+  @media(max-width:860px){.rail-btn.active{border-bottom-color:var(--rc,var(--gold-3));}}
+  .rail-ring{
+    width:32px;height:32px;border-radius:50%;flex-shrink:0;border:1.5px solid var(--rc,var(--gold-3));
+    display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-weight:700;font-size:11.5px;color:var(--rc,var(--gold-3));
+  }
+  .rail-btn .rn{font-family:'Oswald',sans-serif;font-size:15px;letter-spacing:0.03em;text-transform:uppercase;color:var(--ink);}
+  .rail-btn .rt{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#8a8676;margin-top:2px;}
+
+  .console-panel{padding:48px 52px;}
+  @media(max-width:640px){.console-panel{padding:36px 24px;}}
+  .panel-head{display:flex;align-items:center;gap:18px;margin-bottom:20px;}
+  .panel-ring{
+    width:56px;height:56px;border-radius:50%;flex-shrink:0;border:2px solid var(--rc,var(--gold-3));
+    display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-weight:700;font-size:19px;color:var(--rc,var(--gold-3));
+  }
+  .panel-head h3{font-size:30px;color:var(--ink);}
+  .panel-head .pt{font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--rc,var(--gold-3));margin-top:4px;}
+  .panel-lede{font-size:16px;color:#4b483e;max-width:560px;margin-bottom:34px;}
+  .panel-cols{display:grid;grid-template-columns:1fr 1.4fr;gap:44px;}
+  @media(max-width:700px){.panel-cols{grid-template-columns:1fr;gap:30px;}}
+  .panel-focus-label,.panel-steps-label{
+    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8a8676;margin-bottom:16px;
+  }
+  .panel-focus li{font-size:14.5px;color:#4b483e;padding-left:16px;position:relative;margin-bottom:11px;}
+  .panel-focus li::before{content:'';position:absolute;left:0;top:8px;width:6px;height:1px;background:var(--rc,var(--gold-3));}
+  .panel-step{display:flex;gap:14px;margin-bottom:18px;}
+  .panel-step .ps-num{
+    font-family:'Oswald',sans-serif;font-weight:700;font-size:13px;color:var(--rc,var(--gold-3));
+    width:26px;height:26px;border-radius:50%;border:1px solid var(--rc,var(--gold-3));
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .panel-step h5{font-size:14.5px;text-transform:uppercase;letter-spacing:0.02em;color:var(--ink);margin-bottom:3px;font-family:'Oswald',sans-serif;font-weight:600;}
+  .panel-step p{font-size:13.5px;color:#5c584c;}
+  .panel-cta{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap;}
+  .btn-dark{background:var(--ink);color:var(--white);}
+  .btn-dark:hover{filter:brightness(1.2);}
+  .btn-outline-dark{border-color:rgba(23,22,15,0.35);color:var(--ink);}
+  .btn-outline-dark:hover{border-color:var(--ink);}
+
+  /* ---------- Outcomes ---------- */
+  .outcomes{background:var(--black);}
+  .outcomes-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;}
+  @media(max-width:900px){.outcomes-grid{grid-template-columns:1fr;gap:40px;}}
+  .out-block h3{font-size:15px;letter-spacing:0.1em;color:var(--gold-1);margin-bottom:22px;font-family:'Space Mono',monospace;text-transform:uppercase;}
+  .check-list li{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--line-soft);font-size:16px;color:var(--white);}
+  .check-list li:last-child{border-bottom:none;}
+  .check-mark{width:20px;height:20px;border-radius:50%;border:1px solid var(--gold-1);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .check-mark svg{width:11px;height:11px;stroke:var(--gold-2);}
+
+  /* ---------- Gear CTA ---------- */
+  .gear{background:linear-gradient(135deg,var(--black-2),var(--black));border-top:1px solid var(--line-soft);text-align:center;padding:110px 0;}
+  .gear .eyebrow{display:block;margin-bottom:18px;}
+  .gear h2{font-size:clamp(32px,5vw,54px);max-width:760px;margin:0 auto 22px;}
+  .gear p{color:var(--gray);max-width:520px;margin:0 auto 40px;font-size:16.5px;}
+
+  /* ---------- Contact ---------- */
+  .contact{background:var(--black-3);border-top:1px solid var(--line-soft);}
+  .contact-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:70px;}
+  @media(max-width:900px){.contact-grid{grid-template-columns:1fr;gap:50px;}}
+  .contact h2{font-size:clamp(30px,4vw,44px);margin:14px 0 20px;}
+  .contact p.lede{color:var(--gray);font-size:16px;max-width:400px;margin-bottom:34px;}
+  .contact-info{display:flex;flex-direction:column;gap:20px;}
+  .contact-info-row{display:flex;gap:16px;align-items:flex-start;}
+  .contact-info-row .ci-icon{width:38px;height:38px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .contact-info-row .ci-icon svg{width:16px;height:16px;stroke:var(--gold-2);}
+  .contact-info-row .ci-label{font-size:11.5px;font-family:'Space Mono',monospace;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-dark);}
+  .contact-info-row .ci-value{font-size:15.5px;color:var(--white);margin-top:2px;}
+  form.book-form{background:var(--black-2);border:1px solid var(--line-soft);border-radius:6px;padding:38px;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  @media(max-width:560px){.form-row{grid-template-columns:1fr;}}
+  .field{margin-bottom:20px;}
+  .field label{display:block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray);margin-bottom:9px;}
+  .field input, .field select, .field textarea{
+    width:100%;background:var(--black);border:1px solid var(--line-soft);color:var(--white);padding:13px 14px;
+    font-family:'Inter',sans-serif;font-size:14.5px;border-radius:3px;transition:border-color .2s ease;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{outline:none;border-color:var(--gold-1);}
+  .field textarea{resize:vertical;min-height:100px;}
+  .form-msg{margin-top:16px;font-size:14px;color:var(--gold-2);display:none;font-family:'Space Mono',monospace;}
+  .form-msg.show{display:block;}
+  form.book-form button{width:100%;justify-content:center;margin-top:6px;}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--black);padding:60px 0 30px;border-top:1px solid var(--line-soft);}
+  .footer-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:40px;padding-bottom:44px;border-bottom:1px solid var(--line-soft);margin-bottom:26px;}
+  .footer-brand{max-width:300px;}
+  .footer-brand .brand{margin-bottom:16px;}
+  .footer-brand p{color:var(--gray);font-size:14px;}
+  .footer-cols{display:flex;gap:64px;flex-wrap:wrap;}
+  .footer-col h5{font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray-dark);margin-bottom:16px;}
+  .footer-col li{margin-bottom:11px;}
+  .footer-col a{color:var(--gray);font-size:14.5px;transition:color .2s ease;}
+  .footer-col a:hover{color:var(--gold-2);}
+  .footer-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--gray-dark);}
+
+  /* ---------- reveal animation ---------- */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    html{scroll-behavior:auto;}
+  }
+  ::selection{background:var(--gold-1);color:var(--ink);}
+
+  /* ---------- Branch landing pages ---------- */
+  .crumb{
+    font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.08em;
+    color:var(--gray-dark);text-transform:uppercase;margin-bottom:24px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .crumb a{color:var(--gray);}
+  .crumb a:hover{color:var(--gold-2);}
+  .branch-hero{
+    padding:168px 0 90px;
+    background:
+      radial-gradient(circle at 85% 10%, rgba(200,161,61,0.14), transparent 45%),
+      var(--black);
+    border-bottom:1px solid var(--line-soft);
+    position:relative;overflow:hidden;
+  }
+  .branch-hero-grid{display:grid;grid-template-columns:1.2fr 0.8fr;gap:60px;align-items:end;}
+  @media(max-width:900px){.branch-hero-grid{grid-template-columns:1fr;gap:36px;}}
+  .branch-hero-ring{
+    width:92px;height:92px;border-radius:50%;
+    border:1.5px solid var(--bc,var(--gold-1));
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Oswald',sans-serif;font-weight:700;font-size:32px;color:var(--bc,var(--gold-1));
+    margin-bottom:26px;
+  }
+  .branch-hero h1{font-size:clamp(40px,6vw,72px);}
+  .branch-hero .b-tag{
+    font-family:'Space Mono',monospace;font-size:13px;letter-spacing:0.3em;text-transform:uppercase;
+    color:var(--bc,var(--gold-1));margin:16px 0 26px;
+  }
+  .branch-hero p.lede{font-size:17.5px;color:var(--gray);max-width:520px;margin-bottom:34px;}
+  .branch-stats{display:flex;flex-direction:column;gap:0;border:1px solid var(--line-soft);border-radius:6px;overflow:hidden;}
+  .branch-stat{padding:20px 24px;border-bottom:1px solid var(--line-soft);background:var(--black-2);}
+  .branch-stat:last-child{border-bottom:none;}
+  .branch-stat .bs-label{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-dark);margin-bottom:6px;}
+  .branch-stat .bs-value{font-size:15px;color:var(--white);}
+
+  .steps-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);}
+  @media(max-width:820px){.steps-wrap{grid-template-columns:1fr;}}
+  .step-card{background:var(--black-3);padding:40px 32px;}
+  .step-card .step-num{
+    font-family:'Oswald',sans-serif;font-size:44px;font-weight:700;
+    color:transparent;-webkit-text-stroke:1.5px var(--bc,var(--gold-1));
+    margin-bottom:20px;line-height:1;
+  }
+  .step-card h4{font-size:19px;margin-bottom:12px;color:var(--white);}
+  .step-card p{font-size:14.5px;color:var(--gray);}
+
+  .branch-cta{
+    background:linear-gradient(135deg,var(--black-2),var(--black));
+    border-top:1px solid var(--line-soft);
+    padding:90px 0;text-align:center;
+  }
+  .branch-cta h2{font-size:clamp(28px,4.5vw,42px);max-width:640px;margin:0 auto 18px;}
+  .branch-cta p{color:var(--gray);max-width:480px;margin:0 auto 34px;font-size:16px;}
+  .branch-cta .btn-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+
+  .related-branches{display:flex;gap:14px;flex-wrap:wrap;margin-top:18px;justify-content:center;}
+  .related-pill{
+    display:flex;align-items:center;gap:10px;padding:10px 18px 10px 10px;
+    border:1px solid var(--line-soft);border-radius:30px;
+    transition:border-color .2s ease;
+  }
+  .related-pill:hover{border-color:var(--gold-1);}
+  .related-pill .rp-ring{
+    width:26px;height:26px;border-radius:50%;
+    border:1.5px solid var(--rc2,var(--gold-1));
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Oswald',sans-serif;font-weight:700;font-size:10px;color:var(--rc2,var(--gold-1));
+  }
+  .related-pill .rp-name{font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:0.06em;text-transform:uppercase;color:var(--white);}
+
+</style>
+</head>
+<body>
+<header>
+  <div class="nav-wrap">
+    <a href="index.html#home" class="brand">
+      <svg class="brand-mark" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="44" stroke="url(#g1)" stroke-width="3" stroke-dasharray="230 20"/>
+        <text x="50" y="62" text-anchor="middle" font-family="Oswald" font-size="40" font-weight="700" fill="url(#g1)">FL</text>
+        <defs>
+          <linearGradient id="g1" x1="0" y1="0" x2="100" y2="100">
+            <stop offset="0" stop-color="#8a6a1e"/><stop offset="0.5" stop-color="#f3dd9a"/><stop offset="1" stop-color="#c8a13d"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <span class="brand-word">FUT<span>LAB</span></span>
+    </a>
+    <nav class="links">
+      <a href="index.html#philosophy">Philosophy</a>
+      <a href="index.html#programs">Programs</a>
+      <a href="index.html#branches">Branches</a>
+      <a href="index.html#outcomes">Results</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="index.html#contact" class="btn btn-outline">Contact</a>
+      <a href="index.html#contact" class="btn btn-gold">Book Session</a>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#philosophy">Philosophy</a>
+  <a href="index.html#programs">Programs</a>
+  <a href="index.html#branches">Branches</a>
+  <a href="index.html#outcomes">Results</a>
+  <a href="index.html#contact">Contact</a>
+  <a href="index.html#contact" class="btn btn-gold" style="justify-content:center;margin-top:10px;">Book Session</a>
+</div>
+<section class="branch-hero" style="--bc:#c76b3a">
+  <div class="container">
+    <div class="crumb"><a href="index.html">Home</a> / <a href="index.html#branches">Branches</a> / FutSolo</div>
+    <div class="branch-hero-grid">
+      <div>
+        <div class="branch-hero-ring">FS</div>
+        <h1>Reps that build on<br>every FUTLAB session.</h1>
+        <div class="b-tag">Repeat</div>
+        <p class="lede">Structured, at-home drills and skill reps kids can do on their own to build touch, speed, and confidence between FUTLAB sessions.</p>
+        <div class="hero-btns">
+          <a href="index.html?program=FutSolo#contact" class="btn btn-gold">Book This Program</a>
+          <a href="#steps" class="btn btn-outline">How It Works</a>
+        </div>
+      </div>
+      <div class="branch-stats reveal">
+        <div class="branch-stat">
+          <div class="bs-label">Who it's for</div>
+          <div class="bs-value">Players wanting extra reps between sessions</div>
+        </div>
+        <div class="branch-stat">
+          <div class="bs-label">Formats</div>
+          <div class="bs-value">Drill guides, home-friendly circuits, video demos (coming soon)</div>
+        </div>
+        <div class="branch-stat">
+          <div class="bs-label">Outcome</div>
+          <div class="bs-value">Consistency and confidence built through repetition</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="philosophy section-pad">
+  <div class="container philosophy-grid">
+    <div class="reveal">
+      <span class="eyebrow">About FutSolo</span>
+      <h2>Practice that<br>doesn't need a coach.</h2>
+      <p class="body-text">FutSolo takes the same Communicate-Decide-Execute framework from every FUTLAB session and turns it into simple reps a player can do alone, with just a ball and a bit of space — a driveway, a backyard, a garage.</p>
+      <p class="body-text">It's not a replacement for coached sessions — it's the repetition in between that makes the next session count for more.</p>
+    </div>
+    <div class="reveal">
+      <div class="fw-card" style="grid-template-columns:1fr;">
+        <div>
+          <div class="p-focus" style="margin-bottom:16px;">Focus Areas</div>
+          <ul class="p-focus-list">
+          <li>Solo ball-mastery &amp; first-touch drills</li>
+          <li>Speed, agility &amp; footwork circuits</li>
+          <li>Simple, space-friendly setups for home or backyard</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="programs section-pad" id="steps">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">How to Get Involved</span>
+      <h2>Three steps to<br>start FutSolo.</h2>
+    </div>
+  </div>
+  <div class="container" style="padding:0 32px;">
+    <div class="steps-wrap reveal" style="--bc:#c76b3a">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <h4>Get Your Drill Set</h4>
+        <p>Receive a starter set of at-home drills matched to the player's age and current level.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <h4>Practice on Your Own Schedule</h4>
+        <p>Work through reps a few times a week — just a ball and a bit of space required, no extra equipment.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <h4>Bring It Back to FUTLAB</h4>
+        <p>Coaches check in on progress and adjust reps as part of regular sessions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="branch-cta">
+  <div class="container reveal">
+    <span class="eyebrow" style="color:#c76b3a;">Ready When You Are</span>
+    <h2>Get involved with <span class="gold-text">FutSolo</span></h2>
+    <p>Book directly through the form and let us know you're interested in FutSolo — we'll follow up with next steps.</p>
+    <div class="btn-row">
+      <a href="index.html?program=FutSolo#contact" class="btn btn-gold">Book This Program</a>
+      <a href="index.html#branches" class="btn btn-outline">See All Branches</a>
+    </div>
+    <div class="related-branches">
+      <a class="related-pill" href="futacademy.html" style="--rc2:#5a6bc0">
+        <span class="rp-ring">FA</span>
+        <span class="rp-name">FutAcademy</span>
+      </a>
+      <a class="related-pill" href="futmedia.html" style="--rc2:#b25555">
+        <span class="rp-ring">FM</span>
+        <span class="rp-name">FutMedia</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="brand">
+          <svg class="brand-mark" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="44" stroke="url(#gf1)" stroke-width="3" stroke-dasharray="230 20"/>
+            <text x="50" y="62" text-anchor="middle" font-family="Oswald" font-size="40" font-weight="700" fill="url(#gf1)">FL</text>
+            <defs>
+              <linearGradient id="gf1" x1="0" y1="0" x2="100" y2="100">
+                <stop offset="0" stop-color="#8a6a1e"/><stop offset="0.5" stop-color="#f3dd9a"/><stop offset="1" stop-color="#c8a13d"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="brand-word">FUT<span>LAB</span></span>
+        </div>
+        <p>Mississippi Surf's supplemental player development program. Master your next action.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h5>Programs</h5>
+          <ul><li><a href="index.html#programs">FutLab Futsal</a></li><li><a href="futacademy.html">FutAcademy</a></li><li><a href="futlabstudio.html">FutLab Studio</a></li></ul>
+        </div>
+        <div class="footer-col">
+          <h5>Branches</h5>
+          <ul><li><a href="futarena.html">FutArena</a></li><li><a href="futcoach.html">FutCoach</a></li><li><a href="futgear.html">FutGear</a></li></ul>
+        </div>
+        <div class="footer-col">
+          <h5>More</h5>
+          <ul><li><a href="futmedia.html">FutMedia</a></li><li><a href="futmasterclass.html">FutMasterclass</a></li><li><a href="index.html#contact">Contact</a></li></ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 FUTLAB · Mississippi Surf. All rights reserved.</span>
+      <span>Communicate. Decide. Execute.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburgerBtn.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); } });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
