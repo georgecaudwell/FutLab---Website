@@ -440,7 +440,7 @@
             <li>Accuracy of execution under pressure</li>
             <li>The ability to think the next action</li>
           </ul>
-          <a href="index.html?program=FutLab%20Futsal#contact" class="btn btn-outline btn-sm" style="margin-top:18px;">Join the Team &rarr;</a>
+          <a href="index.html?program=FutLab%20Futsal#contact" class="btn btn-outline btn-sm" style="margin-top:18px;">Learn More &rarr;</a>
         </div>
       </div>
       <div class="program-row">
@@ -646,6 +646,27 @@
   const formErr = document.getElementById('formErr');
   const submitBtn = document.getElementById('submitBtn');
   const programSelect = document.getElementById('program');
+  const messageField = document.getElementById('message');
+
+  // Placeholder text tailored to whichever program is selected
+  const MESSAGE_PLACEHOLDERS = {
+    "FutLab Futsal": "Player age, position, and current team experience...",
+    "FutAcademy": "Player age, position, and specific skills you'd like to focus on...",
+    "FutLab Studio": "Player age, position, and a link or note about the match footage you'd like reviewed...",
+    "FutArena": "Team name (or 'looking for a team'), player ages, and which format you're interested in...",
+    "FutCoach": "Your coaching background and whether you're interested in courses, mentoring, or resources...",
+    "FutGear": "What you're looking to order — individual gear, or a full club package...",
+    "FutMedia": "The player, moment, or story you'd like to share or nominate...",
+    "FutMasterclass": "Player age, position, and which masterclass topic interests you most...",
+    "Not sure yet": "Tell us a bit about what you're looking for and we'll point you in the right direction..."
+  };
+
+  function updateMessagePlaceholder(){
+    const val = programSelect.value;
+    messageField.placeholder = MESSAGE_PLACEHOLDERS[val] || "Player age, position, goals...";
+  }
+  programSelect.addEventListener('change', updateMessagePlaceholder);
+  updateMessagePlaceholder();
 
   bookForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -684,7 +705,10 @@
   const preselect = urlParams.get('program');
   if (preselect) {
     const opt = Array.from(programSelect.options).find(o => o.value === preselect);
-    if (opt) programSelect.value = preselect;
+    if (opt) {
+      programSelect.value = preselect;
+      updateMessagePlaceholder();
+    }
   }
 
   // ---------- Branch Console data ----------
@@ -816,6 +840,7 @@
       if (opt) {
         e.preventDefault();
         programSelect.value = b.name;
+        updateMessagePlaceholder();
         document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
       }
     });
