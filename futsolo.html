@@ -389,6 +389,20 @@
   }
   .related-pill .rp-name{font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:0.06em;text-transform:uppercase;color:var(--white);}
 
+  /* ---------- App Download (FutSolo) ---------- */
+  .app-download{background:var(--black-3);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);text-align:center;}
+  .app-download p.lede-app{color:var(--gray);max-width:520px;margin:16px auto 36px;font-size:16.5px;}
+  .store-badges{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+  .store-badge{
+    display:flex;align-items:center;gap:14px;padding:16px 26px;
+    border:1px dashed var(--line);border-radius:8px;background:var(--black-2);
+    cursor:default;user-select:none;
+  }
+  .store-badge svg{width:28px;height:28px;flex-shrink:0;stroke:var(--gray);fill:none;}
+  .store-badge .sb-text{text-align:left;}
+  .store-badge .sb-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-dark);}
+  .store-badge .sb-store{font-family:'Oswald',sans-serif;font-size:17px;color:var(--white);text-transform:uppercase;letter-spacing:0.02em;margin-top:2px;}
+
 </style>
 </head>
 <body>
@@ -439,7 +453,8 @@
         <div class="b-tag">Repeat</div>
         <p class="lede">Structured, at-home drills and skill reps kids can do on their own to build touch, speed, and confidence between FUTLAB sessions.</p>
         <div class="hero-btns">
-          <a href="index.html?program=FutSolo#contact" class="btn btn-gold">Book This Program</a>
+          <a href="#app-download" class="btn btn-gold">Get the App</a>
+          <a href="index.html?program=FutSolo#contact" class="btn btn-outline">Book This Program</a>
           <a href="#steps" class="btn btn-outline">How It Works</a>
         </div>
       </div>
@@ -455,6 +470,30 @@
         <div class="branch-stat">
           <div class="bs-label">Outcome</div>
           <div class="bs-value">Consistency and confidence built through repetition</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="app-download section-pad" id="app-download">
+  <div class="container">
+    <span class="eyebrow" style="color:#c76b3a;">Train Anywhere</span>
+    <h2 style="margin:16px 0 0;">Get the <span class="gold-text">FutSolo</span> App</h2>
+    <p class="lede-app">Follow your drills, log your reps, and take FutSolo training with you wherever there's a ball and a bit of space. Launching soon on iOS and Android.</p>
+    <div class="store-badges reveal">
+      <div class="store-badge" aria-disabled="true">
+        <svg viewBox="0 0 24 24"><path d="M16.5 3c.2 1.2-.3 2.4-1 3.2-.8.9-2 1.6-3.2 1.5-.2-1.2.4-2.5 1.1-3.2C14.2 3.6 15.4 3 16.5 3zM20.8 17.2c-.6 1.3-.9 1.9-1.6 3-1 1.6-2.5 3.5-4.3 3.5-1.6 0-2-1-4.1-1s-2.6 1-4.2 1c-1.8 0-3.2-1.8-4.2-3.3C.2 17 0 13 1.5 10.8c1-1.5 2.6-2.5 4.2-2.5 1.6 0 2.6 1.1 4 1.1 1.3 0 2.1-1.1 4-1.1 1.4 0 2.9.8 3.9 2.1-3.4 1.9-2.8 6.7.9 8.2-.2.6-.4 1.1-.7 1.6z" stroke-width="0"/></svg>
+        <div class="sb-text">
+          <div class="sb-label">Coming Soon on the</div>
+          <div class="sb-store">App Store</div>
+        </div>
+      </div>
+      <div class="store-badge" aria-disabled="true">
+        <svg viewBox="0 0 24 24"><path d="M3.6 2.5c-.4.4-.6 1-.6 1.7v15.6c0 .7.2 1.3.6 1.7l.1.1L13 12.1v-.2L3.7 2.4l-.1.1z" stroke-width="0"/><path d="M16.2 15.3l-3.2-3.2v-.2l3.2-3.2 3.6 2c1 .6 1 1.6 0 2.2l-3.6 2z" stroke-width="0"/></svg>
+        <div class="sb-text">
+          <div class="sb-label">Coming Soon on</div>
+          <div class="sb-store">Google Play</div>
         </div>
       </div>
     </div>
@@ -518,7 +557,8 @@
     <h2>Get involved with <span class="gold-text">FutSolo</span></h2>
     <p>Book directly through the form and let us know you're interested in FutSolo — we'll follow up with next steps.</p>
     <div class="btn-row">
-      <a href="index.html?program=FutSolo#contact" class="btn btn-gold">Book This Program</a>
+      <a href="#app-download" class="btn btn-gold">Get the App</a>
+      <a href="index.html?program=FutSolo#contact" class="btn btn-outline">Book This Program</a>
       <a href="index.html#branches" class="btn btn-outline">See All Branches</a>
     </div>
     <div class="related-branches">
