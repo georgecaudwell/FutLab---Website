@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" type="image/png" href="images/favicon.png">
-<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FUTLAB — Mississippi Surf Player Development</title>
 <meta name="description" content="FUTLAB is Mississippi Surf's supplemental player development program. Communicate. Decide. Execute. Master your next action.">
@@ -328,7 +328,7 @@
 <header>
   <div class="nav-wrap">
     <a href="#home" class="brand">
-      <img class="brand-mark" src="images/futlab-logo.png" alt="FUTLAB logo">
+      <img class="brand-mark" src="futlab-logo.png" alt="FUTLAB logo">
       <span class="brand-word">FUT<span>LAB</span></span>
     </a>
     <nav class="links">
@@ -361,7 +361,7 @@
   <div class="hero-ring two"></div>
   <div class="container hero-grid">
     <div>
-      <img class="hero-logo" src="images/futlab-logo.png" alt="FUTLAB crest">
+      <img class="hero-logo" src="futlab-logo.png" alt="FUTLAB crest">
       <h1>MASTER YOUR<span class="line2 gold-text">NEXT ACTION.</span></h1>
       <div class="hero-tag"><b>COMMUNICATE.</b><b>DECIDE.</b><b>EXECUTE.</b></div>
       <p class="lede">FUTLAB is Mississippi Surf's supplemental player development program — built to sharpen the football action through the unique demands of futsal and small-group coaching.</p>
@@ -426,7 +426,7 @@
             <li>Accuracy of execution under pressure</li>
             <li>The ability to think the next action</li>
           </ul>
-          <a href="index.html?program=FutLab%20Futsal#contact" class="btn btn-outline btn-sm" style="margin-top:18px;">Join the Team &rarr;</a>
+          <a href="futsal.html" class="btn btn-outline btn-sm" style="margin-top:18px;">Learn More &rarr;</a>
         </div>
       </div>
       <div class="program-row">
@@ -450,7 +450,7 @@
   <div class="container">
     <div class="section-head reveal">
       <span class="eyebrow">The FUTLAB Ecosystem</span>
-      <h2>Four branches.<br>One mission.</h2>
+      <h2>Five branches.<br>One mission.</h2>
       <p>Select a branch to see what it offers and exactly how to get involved — no scrolling required.</p>
     </div>
   </div>
@@ -560,7 +560,7 @@
     <div class="footer-top">
       <div class="footer-brand">
         <div class="brand">
-          <img class="brand-mark" src="images/futlab-logo.png" alt="FUTLAB logo">
+          <img class="brand-mark" src="futlab-logo.png" alt="FUTLAB logo">
           <span class="brand-word">FUT<span>LAB</span></span>
         </div>
         <p>Mississippi Surf's supplemental player development program. Master your next action.</p>
@@ -568,7 +568,7 @@
       <div class="footer-cols">
         <div class="footer-col">
           <h5>Programs</h5>
-          <ul><li><a href="##programs">FutLab Futsal</a></li><li><a href="futacademy.html">FutAcademy</a></li></ul>
+          <ul><li><a href="futsal.html">FutLab Futsal</a></li><li><a href="futacademy.html">FutAcademy</a></li></ul>
         </div>
         <div class="footer-col">
           <h5>Branches</h5>
@@ -576,7 +576,7 @@
         </div>
         <div class="footer-col">
           <h5>Site</h5>
-          <ul><li><a href="##philosophy">Philosophy</a></li><li><a href="##outcomes">Results</a></li><li><a href="##contact">Contact</a></li></ul>
+          <ul><li><a href="#philosophy">Philosophy</a></li><li><a href="#outcomes">Results</a></li><li><a href="#contact">Contact</a></li></ul>
         </div>
       </div>
     </div>
@@ -650,6 +650,16 @@
 
   // ---------- Branch Console data ----------
   const BRANCHES = [
+    {
+      id: "futsal", code: "FL", name: "FutLab Futsal", tag: "Play", color: "#c8a13d",
+      lede: "Futsal for U8–U12 girls and boys in Tupelo. A smaller court and more touches every minute — skills that carry straight back to the outdoor game.",
+      focus: ["Decisions with less space and time", "First touch, passing &amp; dribbling under pressure", "Confidence on the ball"],
+      steps: [
+        ["Request a Spot", "Fill in the form with your player's name and age group."],
+        ["Get Your Schedule", "We'll confirm your player's group, times and venue."],
+        ["Show Up &amp; Play", "Bring indoor shoes, a water bottle and plenty of energy."]
+      ]
+    },
     {
       id: "futacademy", code: "FA", name: "FutAcademy", tag: "Develop", color: "#5a6bc0",
       lede: "Small-group coaching — 1 to 5 players — designed around each player's goals, position, and areas for growth.",
@@ -768,7 +778,7 @@
     renderPanel(b);
   }
 
-  showBranch('futacademy');
+  showBranch('futsal');
 
   // Hero "jump to a branch" tiles select the branch in the console
   jumpGrid.querySelectorAll('[data-jump]').forEach(el => {
